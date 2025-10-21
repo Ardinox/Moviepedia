@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import genreids from "../Utility/genre";
 
-function WatchList({ watchlist, setWatchlist }) {
+function WatchList({ watchlist, setWatchlist, handleRemoveFromWatchlist }) {
   const [search, setSearch] = useState("");
+  const [genreList, setGenreList] = useState(["All Genres"]);
+  const [currGenre, setCurrGenre] = useState("All Genres");
 
   let handleSearch = (e) => {
     setSearch(e.target.value);
+  };
+
+  let handleFilter = (genre) => {
+    setCurrGenre(genre);
   };
 
   let sortIncreasing = () => {
@@ -22,18 +28,30 @@ function WatchList({ watchlist, setWatchlist }) {
     setWatchlist([...sortedDecreasing]);
   };
 
+  useEffect(() => {
+    let temp = watchlist.map((movieObj) => {
+      return genreids[movieObj.genre_ids[0]];
+    })
+    temp = new Set(temp)
+    setGenreList(["All Genres", ...temp]);
+  }, [watchlist]);
+
   return (
     <>
       <div className="flex justify-center gap-4 flex-wrap m-4">
-        <div className="flex justify-center items-center h-[3rem] w-[9rem] bg-blue-400 rounded-xl text-white font-bold">
-          Action
-        </div>
-        <div className="flex justify-center items-center h-[3rem] w-[9rem] bg-gray-900 rounded-xl text-white font-bold">
-          Fantasy
-        </div>
-        <div className="flex justify-center items-center h-[3rem] w-[9rem] bg-red-400 rounded-xl text-white font-bold">
-          Romance
-        </div>
+        {genreList.map((genre) => {
+          return (
+            <div
+              key={genre}
+              onClick={() => handleFilter(genre)}
+              className={
+                currGenre == genre
+                  ? "flex justify-center items-center h-[3rem] w-[9rem] bg-blue-400 rounded-xl text-white font-bold"
+                  : "flex justify-center items-center h-[3rem] w-[9rem] bg-gray-400/60 rounded-xl text-white font-bold"
+              }
+            >{genre}</div>
+          );
+        })}
       </div>
       <div className="flex justify-center my-4">
         <input
@@ -65,7 +83,13 @@ function WatchList({ watchlist, setWatchlist }) {
             </tr>
           </thead>
           <tbody>
-            {watchlist
+            {watchlist.filter((movieObj)=>{
+              if(currGenre=='All Genres'){
+                return true
+              } else{
+                return genreids[movieObj.genre_ids[0]]==currGenre
+              }
+            })
               .filter((movieObj) => {
                 return movieObj.title
                   .toLowerCase()
@@ -84,7 +108,7 @@ function WatchList({ watchlist, setWatchlist }) {
                     <td>{movieObj.vote_average}</td>
                     <td>{movieObj.popularity}</td>
                     <td>{genreids[movieObj.genre_ids[0]]}</td>
-                    <td className="text-red-800">Delete</td>
+                    <td onClick={()=>handleRemoveFromWatchlist(movieObj)} className="text-red-800">Delete</td>
                   </tr>
                 );
               })}

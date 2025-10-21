@@ -19,10 +19,11 @@ Moviepedia is a modern and responsive web application built with **React** and *
 | Category | Tools and Frameworks |
 |-----------|----------------------|
 | Frontend | React, Vite |
-| Styling | CSS / TailwindCSS (if applicable) |
+| Styling | CSS / TailwindCSS |
 | Data Fetching | Fetch API / Axios |
 | Linting | ESLint |
 | Build Tool | Vite |
+| Api | TMDB Api |
 
 ---
 
@@ -30,30 +31,30 @@ Moviepedia is a modern and responsive web application built with **React** and *
 
 To run this project locally, make sure Node.js (v16 or higher) is installed.
 
-Clone the repository
-git clone https://github.com/Ardinox/Moviepedia.git
+- **Clone the repository**\
+`git clone https://github.com/Ardinox/Moviepedia.git`
 
-Navigate into the project directory
-cd Moviepedia
+- **Navigate into the project directory**\
+`cd Moviepedia`
 
-Install dependencies
-npm install
+- **Install dependencies**\
+`npm install`
 
-Start the development server
-npm run dev
+- **Start the development server**\
+`npm run dev`
 
 
-Open your browser and visit:  
+- **Open your browser and visit:**\
 [http://localhost:5173](http://localhost:5173)
 
 ---
 
 ## 🔑 Environment Variables
 
-To use the movie API (like OMDb or TMDB), create a `.env` file in the root and add:
+To use the movie API (TMDB api is used for this project), create a `.env` file in the root and add:
 
-VITE_MOVIE_API_KEY=your_api_key_here
-VITE_API_URL=https://api.themoviedb.org/3
+VITE_TMDB_KEY = [your_api_key_here]\
+VITE_API_URL = [https://developer.themoviedb.org/](https://developer.themoviedb.org/)
 
 *(Replace with your actual key and endpoint.)*
 
@@ -96,12 +97,6 @@ Moviepedia/
 - Integrate pagination and advanced filtering  
 - Add trailer playback using YouTube embed API  
 - Migrate to TypeScript for better type safety  
-
----
-
-## 📸 Screenshots
-
-*(Add screenshots or GIFs here once your UI is ready)*  
 
 ---
 
