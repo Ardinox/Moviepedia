@@ -60,7 +60,7 @@ VITE_API_URL=https://api.themoviedb.org/3
 ---
 
 ## 🧩 Folder Structure
-
+```
 Moviepedia/
 ├── public/                     # Static assets like index.html, favicon, images
 ├── src/                        # Source files
@@ -76,7 +76,7 @@ Moviepedia/
 ├── package.json                # Project metadata and dependencies
 ├── vite.config.js              # Vite build tool configuration
 └── README.md                   # Project overview and instructions
-
+```
 ---
 
 ## ⚙️ Scripts
